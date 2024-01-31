@@ -1394,7 +1394,7 @@ if __name__ == "__main__":
         log.warning("No valid candidates for analysation found: "
                     + " ".join(args.inputs))
     encoding = 'ascii'
-    for fsenc in [sys.getfilesystemencoding(), locale.getdefaultlocale()[1]]:
+    for fsenc in [sys.getfilesystemencoding(), locale.getlocale()[1]]:
         if fsenc:
             encoding = fsenc
             break
