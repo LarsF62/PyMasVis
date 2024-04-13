@@ -622,7 +622,7 @@ def render(track, analysis, header, r128_unit='LUFS', render_overview=False,text
     with Timer("Drawing plot...", Steps.draw_plot, callback) as t:
         subtitle_analysis = (('Crests: %.2f dB,  DR: %d,  L$_K$: %.1f %s,  '
                               'LRA: %.1f LU,  PLR: %.1f LU')
-                             % (crest_total_db, dr, l_kg+r128_offset,
+                             % (crest_total_db[0], dr, l_kg+r128_offset,
                                 r128_unit, lra, plr))
         subtitle_source = (('Encoding: %s,  Channels: %d,  Bits: %d,  '
                             'Sample rate: %d Hz,  Bitrate: %s kbps,  '
@@ -920,10 +920,10 @@ def render(track, analysis, header, r128_unit='LUFS', render_overview=False,text
                            int(round(track['metadata']['bps']/1000.0))))
             ax_o.set_title(header_o, fontsize='small', loc='left')
             w_buf = round(ax_o.bbox.bounds[2])
-            h_buf = round(ax_o.bbox.bounds[3])
+            h_buf = round(ax_o.bbox.bounds[3])            
             info_o = ((u"Crests = %0.1f dB\nPeak = %0.1f dBFS\nDR = %d,  "
                        u"L$_k$ = %.1f LU")
-                      % (crest_total_db, peak_dbfs.max(), dr, l_kg+lufs_to_lu))
+                      % (crest_total_db[0], peak_dbfs.max(), dr, l_kg+lufs_to_lu))
             text_o = fig_o.text(482/w_o, 28/h_o, info_o, fontsize='small',
                                 verticalalignment='center', snap=False)
             fig_buf = plt.figure('buffer', figsize=(w_buf/DPI, h_buf/DPI),
