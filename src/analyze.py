@@ -1213,7 +1213,7 @@ def arrays_share_data(x, y):
 
 
 def file_formats():
-    foo = re.compile('\s+DE?\s+(\S+)\s+\S+')
+    foo = re.compile(r'\s+DE?\s+(\S+)\s+\S+')
     formats = []
     try:
         result = subprocess.check_output(
@@ -1275,7 +1275,7 @@ def run(infile, outfile=None, overviewfile=None, fmt='png', destdir='',
         filename = ("%s.spotify-%s-pymasvis.%s"
                     % (track['metadata']['name'],
                        track['metadata']['id'], fmt))
-        illegals = dict((ord(char), ord('~')) for char in '\/*?:"<>|')
+        illegals = dict((ord(char), ord('~')) for char in r'\/*?:"<>|')
         filename = filename.translate(illegals)
         outfile = os.path.join(destdir, filename)
     if not header:
